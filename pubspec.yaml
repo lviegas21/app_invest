@@ -47,6 +47,13 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  equatable: ^2.0.5
+  firebase_auth: ^4.10.0
+  firebase_core: ^2.16.0
+  cloud_firestore: ^4.9.2
+  data_table_2: ^2.5.8
+  intl: ^0.18.0
+  syncfusion_flutter_charts: ^23.1.36
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
