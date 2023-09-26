@@ -37,7 +37,7 @@ class GetxCadastroPresenter extends GetxController
         middleText: 'Seu cadastro foi salvo com sucesso',
         confirm: TextButton(
           onPressed: () {
-            Get.toNamed("/home", arguments: [params]);
+            Get.offNamed("/home", arguments: [params]);
           },
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.white),

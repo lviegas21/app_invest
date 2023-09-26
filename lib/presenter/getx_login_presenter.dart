@@ -26,7 +26,8 @@ class GetxLoginPresenter extends GetxController implements LoginPresenter {
     AuthenticationParams params = AuthenticationParams(
         cpf: cpfController.value.text, secret: senhaController.value.text);
     final result = await authentication.auth(params);
+    print(result);
 
-    Get.toNamed("/home", arguments: [result.user.uid, params]);
+    Get.offNamed("/home", arguments: [result.user.uid, params]);
   }
 }

@@ -11,13 +11,13 @@ class RelatorioFinanceiro extends StatelessWidget {
   final String contentBottomRight;
   final Color color;
   const RelatorioFinanceiro({
-    this.color = const Color.fromRGBO(26, 40, 66, 1),
+    this.color = Colors.black,
     required this.titleTopoLeft,
     required this.titleTopoRight,
     required this.contentBottomLeft,
     required this.contentBottomRight,
   });
-
+//this.color = const Color.fromRGBO(26, 40, 66, 1),
   @override
   Widget build(BuildContext context) {
     return Container(

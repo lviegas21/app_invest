@@ -123,13 +123,13 @@ class CadastroPage extends StatelessWidget {
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.caption?.copyWith(
                             fontWeight: FontWeight.w200,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 10),
+                            fontSize: SizeConfig.blockSizeHorizontal! * 7),
                       ),
                       SizedBox(
-                        width: 90,
-                        height: 90,
+                        width: SizeConfig.blockSizeHorizontal! * 50,
+                        height: SizeConfig.blockSizeVertical! * 10,
                         child: Image.asset("assets/logo.png"),
-                      )
+                      ),
                     ],
                   ),
                 ],
