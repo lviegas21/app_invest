@@ -22,6 +22,8 @@ class InvestimentoModels {
   final String? valor_total_aportado;
   final String? valor_total_papel;
   final String? varia_valor_papel;
+  final String? estrategia;
+  final String? valor_acao;
 
   const InvestimentoModels({
     this.acao,
@@ -43,6 +45,8 @@ class InvestimentoModels {
     this.valor_total_aportado,
     this.valor_total_papel,
     this.varia_valor_papel,
+    this.estrategia,
+    this.valor_acao,
   });
 
   factory InvestimentoModels.fromJson(Map json) {
@@ -66,6 +70,8 @@ class InvestimentoModels {
       valor_total_aportado: json["valor_total_aportado"],
       valor_total_papel: json["valor_total_papel"],
       varia_valor_papel: json["varia_valor_papel"],
+      estrategia: json["estrategia"],
+      valor_acao: json["valor_acao"],
     );
   }
 
@@ -89,5 +95,7 @@ class InvestimentoModels {
         valor_total_aportado: valor_total_aportado,
         valor_total_papel: valor_total_papel,
         varia_valor_papel: varia_valor_papel,
+        estrategia: estrategia,
+        valor_acao: valor_acao,
       );
 }

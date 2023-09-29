@@ -90,20 +90,6 @@ class DataBase extends StatelessWidget {
                           color: Colors.white,
                         ),
                         RelatorioFinanceiro(
-                          titleTopoLeft: presenter
-                              .investimento.value.data_operacao
-                              .toString(),
-                          titleTopoRight: 'R\$',
-                          contentBottomLeft: 'Em Operação',
-                          contentBottomRight: presenter
-                              .investimento.value.valor_operacao
-                              .toString(),
-                        ),
-                        Divider(
-                          height: 1,
-                          color: Colors.white,
-                        ),
-                        RelatorioFinanceiro(
                           titleTopoLeft: '',
                           titleTopoRight: 'R\$',
                           contentBottomLeft: 'Saldo + Provento',

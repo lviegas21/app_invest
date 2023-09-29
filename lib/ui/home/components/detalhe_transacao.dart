@@ -70,7 +70,8 @@ class DetalheTransacao extends StatelessWidget {
                     ),
                     TextItem(
                       title: presenter.investimento.value.qtd_papel.toString(),
-                      content: '14.94',
+                      content:
+                          presenter.investimento.value.valor_acao.toString(),
                       colorTitle: Colors.white,
                       colorContent: Colors.white,
                     ),
@@ -90,19 +91,22 @@ class DetalheTransacao extends StatelessWidget {
                     ),
                     TextItem(
                       title: 'Rendimento %',
-                      content: '1.10 %',
+                      content: '${presenter.investimento.value.rendimento} %',
                       colorTitle: Colors.white,
                       colorContent: Colors.white,
                     ),
                     TextItem(
-                      title: 'R\$ 0.17',
-                      content: 'R\$ 1.275,00',
+                      title:
+                          'R\$ ${presenter.investimento.value.varia_valor_papel}',
+                      content:
+                          'R\$ ${presenter.investimento.value.valor_total_papel}',
                       colorTitle: Colors.white,
                       colorContent: Colors.white,
                     ),
                     TextItem(
                       title: 'ESTRATÉGIA',
-                      content: 'LUCRO ILIMITADO',
+                      content:
+                          presenter.investimento.value.estrategia.toString(),
                       colorTitle: Colors.white,
                       colorContent: Colors.white,
                     ),

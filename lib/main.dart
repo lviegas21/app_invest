@@ -1,6 +1,7 @@
 import 'package:bolsa_valores/main/factories/pages/cadastro/cadastro_page_factory.dart';
 import 'package:bolsa_valores/main/factories/pages/home/home_page_factory.dart';
 import 'package:bolsa_valores/main/factories/pages/login/login_page_factory.dart';
+import 'package:bolsa_valores/main/factories/pages/pagamento/pagamento_page_refactor.dart';
 import 'package:bolsa_valores/main/factories/pages/splash/splash.dart';
 import 'package:bolsa_valores/util/theme_data.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,11 @@ class App extends StatelessWidget {
         GetPage(
           name: '/home',
           page: maskeHomePage,
+          transition: Transition.fadeIn,
+        ),
+        GetPage(
+          name: '/pagamento',
+          page: makePagementoPage,
           transition: Transition.fadeIn,
         ),
       ],

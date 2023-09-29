@@ -22,7 +22,7 @@ class RelatorioFinanceiro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: color,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.only(top: 4, right: 8, left: 8, bottom: 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,7 +34,7 @@ class RelatorioFinanceiro extends StatelessWidget {
             showDivider: false,
           ),
           const SizedBox(
-            height: 20,
+            height: 8,
           ),
           TextItem(
             title: contentBottomLeft,

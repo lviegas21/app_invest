@@ -59,6 +59,7 @@ class DrawerComponents extends StatelessWidget {
               ),
             ),
             onTap: () {
+              Get.toNamed("/pagamento");
               // Ação para a opção Pagamentos
             },
             // Cor de destaque ao pressionar o botão

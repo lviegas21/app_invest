@@ -22,6 +22,9 @@ class InvestimentoEntity extends Equatable {
   final String? valor_saldo;
   final String? valor_total_aportado;
   final String? valor_total_papel;
+  final String? estrategia;
+  final String? valor_acao;
+  final String? rendimento;
 
   const InvestimentoEntity({
     this.acao,
@@ -43,6 +46,9 @@ class InvestimentoEntity extends Equatable {
     this.valor_total_aportado,
     this.valor_total_papel,
     this.varia_valor_papel,
+    this.estrategia,
+    this.valor_acao,
+    this.rendimento,
   });
 
   @override
@@ -66,5 +72,8 @@ class InvestimentoEntity extends Equatable {
         valor_total_aportado,
         valor_total_papel,
         varia_valor_papel,
+        estrategia,
+        valor_acao,
+        rendimento,
       ];
 }
