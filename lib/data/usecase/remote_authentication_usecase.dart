@@ -23,12 +23,13 @@ class RemoteAuthentication implements Authentication {
   Future signUp(AuthenticationParams params) async {
     try {
       final response = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: params.cpf, password: params.secret);
+          email: params.email, password: params.secret);
       final saveUsuario =
           await firestore.collection("usuarios").doc(response.user?.uid).set({
         'nome': params.nome,
-        'email': params.cpf,
+        'email': params.email,
         'senha': params.secret,
+        'cpf': params.cpf,
       });
       return response;
     } catch (e) {

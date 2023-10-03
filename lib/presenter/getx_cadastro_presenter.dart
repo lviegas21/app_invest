@@ -16,6 +16,9 @@ class GetxCadastroPresenter extends GetxController
   Rx<TextEditingController> emailController = TextEditingController().obs;
 
   @override
+  Rx<TextEditingController> cpfController = TextEditingController().obs;
+
+  @override
   var isValid = false.obs;
 
   @override
@@ -26,29 +29,51 @@ class GetxCadastroPresenter extends GetxController
 
   @override
   Future<void> loadCadastro() async {
-    AuthenticationParams params = AuthenticationParams(
-        cpf: emailController.value.text,
+    try {
+      AuthenticationParams params = AuthenticationParams(
+        email: emailController.value.text,
         secret: senhaController.value.text,
-        nome: nomeController.value.text);
-    final resultCadastro = await authentication.signUp(params);
-    Get.defaultDialog(
-        backgroundColor: Colors.black,
-        title: 'Cadastro',
-        middleText: 'Seu cadastro foi salvo com sucesso',
-        confirm: TextButton(
-          onPressed: () {
-            Get.offNamed("/home", arguments: [params]);
-          },
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.white),
-          ),
-          child: Text('ok', style: TextStyle(color: Colors.black)),
-        ));
+        nome: nomeController.value.text,
+        cpf: cpfController.value.text,
+      );
+      final resultCadastro = await authentication.signUp(params);
+      Get.defaultDialog(
+          backgroundColor: Colors.black,
+          title: 'Cadastro',
+          middleText: 'Seu cadastro foi salvo com sucesso',
+          confirm: TextButton(
+            onPressed: () {
+              Get.offAllNamed("/home", arguments: [params]);
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.white),
+            ),
+            child: Text('ok', style: TextStyle(color: Colors.black)),
+          ));
+    } catch (e) {
+      Get.defaultDialog(
+          backgroundColor: Colors.black,
+          title: 'Erro',
+          middleText:
+              'Informações invalidas, verifique as informações preenchidas!',
+          confirm: TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.white),
+            ),
+            child: Text('ok', style: TextStyle(color: Colors.black)),
+          ));
+    }
   }
 
   @override
   void validate(String value) =>
       isValid.value = nomeController.value.text.isNotEmpty &&
           emailController.value.text.isNotEmpty &&
-          senhaController.value.text.isNotEmpty;
+          senhaController.value.text.isNotEmpty &&
+          senhaController.value.text.length > 5 &&
+          cpfController.value.text.isNotEmpty &&
+          senhaController.value.text.length > 10;
 }

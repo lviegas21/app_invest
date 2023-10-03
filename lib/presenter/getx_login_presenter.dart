@@ -19,15 +19,20 @@ class GetxLoginPresenter extends GetxController implements LoginPresenter {
   @override
   void validate(String value) =>
       isValid.value = cpfController.value.text.isNotEmpty &&
-          senhaController.value.text.isNotEmpty;
+          senhaController.value.text.isNotEmpty &&
+          senhaController.value.text.length > 5;
 
   @override
   Future<void> loadLogin() async {
-    AuthenticationParams params = AuthenticationParams(
-        cpf: cpfController.value.text, secret: senhaController.value.text);
-    final result = await authentication.auth(params);
-    print(result);
+    try {
+      AuthenticationParams params = AuthenticationParams(
+          email: cpfController.value.text, secret: senhaController.value.text);
+      final result = await authentication.auth(params);
+      print(result);
 
-    Get.offNamed("/home", arguments: [result.user.uid, params]);
+      Get.offAllNamed("/home", arguments: [result.user.uid, params]);
+    } catch (e) {
+      throw e;
+    }
   }
 }

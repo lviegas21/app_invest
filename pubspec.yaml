@@ -45,7 +45,9 @@ dependencies:
   intl: ^0.18.0
   syncfusion_flutter_charts: ^23.1.36
   qr_flutter: ^4.1.0
-  pix_flutter: ^2.2.0
+  pix_flutter: ^2.0.0
+  mask_text_input_formatter: ^2.4.0
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter

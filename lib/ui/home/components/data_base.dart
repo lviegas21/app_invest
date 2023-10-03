@@ -103,23 +103,15 @@ class DataBase extends StatelessWidget {
                         ),
                         RelatorioFinanceiro(
                           titleTopoLeft: '',
-                          titleTopoRight: 'R\$',
+                          titleTopoRight:
+                              '% ${presenter.investimento.value.ganho_percentual.toString()}',
                           contentBottomLeft: 'Ganho real',
-                          contentBottomRight: presenter
-                              .investimento.value.ganho_real
-                              .toString(),
+                          contentBottomRight:
+                              'R\$ ${presenter.investimento.value.ganho_real.toString()}',
                         ),
                         Divider(
                           height: 1,
                           color: Colors.white,
-                        ),
-                        RelatorioFinanceiro(
-                          titleTopoLeft: '',
-                          titleTopoRight: '%',
-                          contentBottomLeft: 'Ganho percentual',
-                          contentBottomRight: presenter
-                              .investimento.value.ganho_percentual
-                              .toString(),
                         ),
                         Divider(
                           height: 1,

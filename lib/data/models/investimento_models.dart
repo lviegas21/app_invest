@@ -24,6 +24,7 @@ class InvestimentoModels {
   final String? varia_valor_papel;
   final String? estrategia;
   final String? valor_acao;
+  final String? rendimento;
 
   const InvestimentoModels({
     this.acao,
@@ -47,6 +48,7 @@ class InvestimentoModels {
     this.varia_valor_papel,
     this.estrategia,
     this.valor_acao,
+    this.rendimento,
   });
 
   factory InvestimentoModels.fromJson(Map json) {
@@ -72,6 +74,7 @@ class InvestimentoModels {
       varia_valor_papel: json["varia_valor_papel"],
       estrategia: json["estrategia"],
       valor_acao: json["valor_acao"],
+      rendimento: json["rendimento"],
     );
   }
 
@@ -97,5 +100,6 @@ class InvestimentoModels {
         varia_valor_papel: varia_valor_papel,
         estrategia: estrategia,
         valor_acao: valor_acao,
+        rendimento: rendimento,
       );
 }

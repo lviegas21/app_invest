@@ -14,8 +14,8 @@ class DrawerComponents extends StatelessWidget {
     return Drawer(
       backgroundColor: Colors.black, // Cor de fundo preta
       child: ListView(
-        physics: NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(vertical: 10),
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         children: [
           Container(
             height: 160, // Altura do cabeçalho
@@ -24,10 +24,10 @@ class DrawerComponents extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 40,
                   backgroundColor: Colors.white, // Cor de fundo branca
                   child: Icon(
@@ -36,30 +36,30 @@ class DrawerComponents extends StatelessWidget {
                     color: Colors.black, // Cor do ícone preta
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(
-                  presenter.params.cpf,
-                  style: TextStyle(
+                  presenter.params.email,
+                  style: const TextStyle(
                     color: Colors.white, // Cor do texto branca
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           ListTile(
-            title: Text(
+            title: const Text(
               'Pagamentos',
               style: TextStyle(
                 color: Colors.amber, // Cor amarelo queimado
               ),
             ),
             onTap: () {
-              Get.toNamed("/pagamento");
+              Get.toNamed("/pagamento", arguments: presenter.uid);
               // Ação para a opção Pagamentos
             },
             // Cor de destaque ao pressionar o botão

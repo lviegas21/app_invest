@@ -9,12 +9,16 @@ abstract class Authentication {
 
 class AuthenticationParams extends Equatable {
   final String nome;
-  final String cpf;
+  final String email;
   final String secret;
+  final String cpf;
 
   const AuthenticationParams(
-      {required this.cpf, required this.secret, this.nome = ""});
+      {required this.email,
+      required this.secret,
+      this.nome = "",
+      this.cpf = ""});
 
   @override
-  List get props => [cpf, secret, nome];
+  List get props => [email, secret, nome, cpf];
 }

@@ -34,7 +34,7 @@ class RelatorioFinanceiro extends StatelessWidget {
             showDivider: false,
           ),
           const SizedBox(
-            height: 8,
+            height: 15,
           ),
           TextItem(
             title: contentBottomLeft,
