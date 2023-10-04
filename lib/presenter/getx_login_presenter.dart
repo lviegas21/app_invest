@@ -17,22 +17,32 @@ class GetxLoginPresenter extends GetxController implements LoginPresenter {
   var isValid = false.obs;
 
   @override
-  void validate(String value) =>
-      isValid.value = cpfController.value.text.isNotEmpty &&
-          senhaController.value.text.isNotEmpty &&
-          senhaController.value.text.length > 5;
+  void validate(String value) => isValid.value = cpfController.value.text.isNotEmpty && senhaController.value.text.isNotEmpty && senhaController.value.text.length > 5;
 
   @override
   Future<void> loadLogin() async {
     try {
-      AuthenticationParams params = AuthenticationParams(
-          email: cpfController.value.text, secret: senhaController.value.text);
+      AuthenticationParams params = AuthenticationParams(email: cpfController.value.text, secret: senhaController.value.text);
       final result = await authentication.auth(params);
-      print(result);
-
       Get.offAllNamed("/home", arguments: [result.user.uid, params]);
     } catch (e) {
-      throw e;
+      cpfController.value.clear();
+      senhaController.value.clear();
+      Get.defaultDialog(
+        backgroundColor: Colors.black,
+        title: 'Erro',
+        titleStyle: TextStyle(color: Colors.white),
+        middleText: 'Informações invalidas, verifique as informações preenchidas!',
+        confirm: TextButton(
+          onPressed: () {
+            Get.back();
+          },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.white),
+          ),
+          child: Text('ok', style: TextStyle(color: Colors.black)),
+        ),
+      );
     }
   }
 }

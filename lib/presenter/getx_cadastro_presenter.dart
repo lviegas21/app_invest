@@ -7,8 +7,7 @@ import 'package:get/get.dart';
 
 import '../ui/cadastro/cadastro_presenter.dart';
 
-class GetxCadastroPresenter extends GetxController
-    implements CadastroPresenter {
+class GetxCadastroPresenter extends GetxController implements CadastroPresenter {
   final Authentication authentication;
   GetxCadastroPresenter({required this.authentication});
 
@@ -39,7 +38,8 @@ class GetxCadastroPresenter extends GetxController
       final resultCadastro = await authentication.signUp(params);
       Get.defaultDialog(
           backgroundColor: Colors.black,
-          title: 'Cadastro',
+          title: 'Sucesso',
+          titleStyle: TextStyle(color: Colors.white),
           middleText: 'Seu cadastro foi salvo com sucesso',
           confirm: TextButton(
             onPressed: () {
@@ -52,28 +52,27 @@ class GetxCadastroPresenter extends GetxController
           ));
     } catch (e) {
       Get.defaultDialog(
-          backgroundColor: Colors.black,
-          title: 'Erro',
-          middleText:
-              'Informações invalidas, verifique as informações preenchidas!',
-          confirm: TextButton(
-            onPressed: () {
-              Get.back();
-            },
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-            ),
-            child: Text('ok', style: TextStyle(color: Colors.black)),
-          ));
+        backgroundColor: Colors.black,
+        title: 'Erro',
+        middleText: 'Informações invalidas, verifique as informações preenchidas!',
+        confirm: TextButton(
+          onPressed: () {
+            Get.back();
+          },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.white),
+          ),
+          child: Text('ok', style: TextStyle(color: Colors.black)),
+        ),
+      );
     }
   }
 
   @override
-  void validate(String value) =>
-      isValid.value = nomeController.value.text.isNotEmpty &&
-          emailController.value.text.isNotEmpty &&
-          senhaController.value.text.isNotEmpty &&
-          senhaController.value.text.length > 5 &&
-          cpfController.value.text.isNotEmpty &&
-          senhaController.value.text.length > 10;
+  void validate(String value) => isValid.value = nomeController.value.text.isNotEmpty &&
+      emailController.value.text.isNotEmpty &&
+      senhaController.value.text.isNotEmpty &&
+      senhaController.value.text.length > 5 &&
+      cpfController.value.text.isNotEmpty &&
+      cpfController.value.text.length > 10;
 }

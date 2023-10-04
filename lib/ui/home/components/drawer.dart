@@ -88,6 +88,23 @@ class DrawerComponents extends StatelessWidget {
           ),
           ListTile(
             title: Text(
+              'Sobre',
+              style: TextStyle(
+                color: Colors.amber, // Cor amarelo queimado
+              ),
+            ),
+            onTap: () {
+              Get.toNamed("/sobre");
+            },
+            // Cor de destaque ao pressionar o botão
+            splashColor: Colors.amberAccent,
+          ),
+          Divider(
+            color: Colors.white, // Cor do divisor
+            thickness: 1, // Espessura do divisor
+          ),
+          ListTile(
+            title: Text(
               'Sair',
               style: TextStyle(
                 color: Colors.amber, // Cor amarelo queimado

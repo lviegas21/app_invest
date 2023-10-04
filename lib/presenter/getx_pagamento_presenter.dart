@@ -4,8 +4,7 @@ import 'package:bolsa_valores/ui/pagamento/pagamento_presenter.dart';
 import 'package:get/get.dart';
 import 'package:pix_flutter/pix_flutter.dart';
 
-class GetxPagamentoPresenter extends GetxController
-    implements PagamentoPresenter {
+class GetxPagamentoPresenter extends GetxController implements PagamentoPresenter {
   final QueryConsultaPay queryConsultaPay;
   dynamic uid = Get.arguments;
 
@@ -28,19 +27,23 @@ class GetxPagamentoPresenter extends GetxController
   @override
   Future<dynamic> loadPix() async {
     isClickPix.value = true;
-    PixFlutter pixFlutter = PixFlutter(
-      payload: Payload(
-        pixKey: '61981535330',
-        merchantName: 'Lucas Ferreira Viegas',
-        merchantCity: 'Sao Luis',
-        amount: '100.00',
-        isUniquePayment: true,
-        txid: '***',
-      ),
-    );
+    try {
+      PixFlutter pixFlutter = PixFlutter(
+        payload: Payload(
+          pixKey: '61981535330',
+          merchantName: 'Lucas Ferreira Viegas',
+          merchantCity: 'Sao Luis',
+          amount: '100.00',
+          isUniquePayment: true,
+          txid: '***',
+        ),
+      );
 
-    payload.value = await pixFlutter.getQRCode();
-    return payload;
+      payload.value = await pixFlutter.getQRCode();
+      return payload;
+    } catch (e) {
+      throw e;
+    }
   }
 
   @override

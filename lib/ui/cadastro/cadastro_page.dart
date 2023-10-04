@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../util/screen_size.dart';
 import '../login/components/email_components.dart';
 import 'components/button_cadastro_components.dart';
+import 'components/cpf_cadastro_components.dart';
 import 'components/email_cadastro_components.dart';
 import 'components/nome_cadastro_components.dart';
 import 'components/senha_cadastro_components.dart';
@@ -24,80 +25,6 @@ class CadastroPage extends StatelessWidget {
       }
     }
 
-    // return Scaffold(
-    //   body: SingleChildScrollView(
-    //     child: Column(
-    //       mainAxisAlignment: MainAxisAlignment.start,
-    //       crossAxisAlignment: CrossAxisAlignment.stretch,
-    //       children: <Widget>[
-    //         Container(
-    //           width: MediaQuery.of(context).size.width,
-    //           height: MediaQuery.of(context).size.height / 2.5,
-    //           decoration: BoxDecoration(
-    //               gradient: LinearGradient(
-    //                 begin: Alignment.topCenter,
-    //                 end: Alignment.bottomCenter,
-    //                 colors: [Color(0xFF0F192C), Color.fromARGB(255, 26, 40, 66)],
-    //               ),
-    //               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(90))),
-    //           child: Column(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             children: <Widget>[
-    //               Spacer(),
-    //               Align(
-    //                   alignment: Alignment.topCenter,
-    //                   child: SizedBox(
-    //                     width: 120,
-    //                     height: 120,
-    //                     child: Image.asset("assets/imagem.png"),
-    //                   )),
-    //               Spacer(),
-    //               Align(
-    //                 alignment: Alignment.bottomRight,
-    //                 child: Padding(
-    //                   padding: const EdgeInsets.only(bottom: 32, right: 32),
-    //                   child: Text(
-    //                     'Entrar',
-    //                     style: TextStyle(color: Colors.white, fontSize: 38),
-    //                   ),
-    //                 ),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //         Container(
-    //           height: MediaQuery.of(context).size.height / 2,
-    //           width: MediaQuery.of(context).size.width,
-    //           padding: EdgeInsets.only(top: 62),
-    //           child: Column(
-    //             children: <Widget>[
-    //               const CPFInput(),
-    //               SizedBox(height: SizeConfig.blockSizeVertical! * 3),
-    //               const PasswordInput(),
-    //               Align(
-    //                 alignment: Alignment.centerRight,
-    //                 child: Padding(
-    //                   padding: const EdgeInsets.only(top: 16, right: 32),
-    //                   child: Text(
-    //                     'Esqueceu sua senha?',
-    //                     style: TextStyle(color: Colors.grey),
-    //                   ),
-    //                 ),
-    //               ),
-    //               Spacer(),
-    //               AnimatedContainer(
-    //                 duration: Duration(milliseconds: 200),
-    //                 //height: isKeyboardVisible ? 0 : 50.h,
-    //                 child: LoginButton(horizontalPadding: SizeConfig.blockSizeHorizontal! * 8),
-    //               ),
-    //             ],
-    //           ),
-    //         )
-    //       ],
-    //     ),
-    //   ),
-    // );
-
     return Scaffold(
       //backgroundColor: AppColor.colorPage,
       resizeToAvoidBottomInset: false,
@@ -108,10 +35,7 @@ class CadastroPage extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 2.5,
-              decoration: BoxDecoration(
-                  color: Colors.black87,
-                  borderRadius:
-                      BorderRadius.only(bottomLeft: Radius.circular(90))),
+              decoration: BoxDecoration(color: Colors.black87, borderRadius: BorderRadius.only(bottomLeft: Radius.circular(90))),
               child: Column(
                 children: [
                   SizedBox(height: SizeConfig.blockSizeVertical! * 15),
@@ -121,9 +45,7 @@ class CadastroPage extends StatelessWidget {
                       Text(
                         "Cadastro".toUpperCase(),
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.caption?.copyWith(
-                            fontWeight: FontWeight.w200,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 7),
+                        style: Theme.of(context).textTheme.caption?.copyWith(fontWeight: FontWeight.w200, fontSize: SizeConfig.blockSizeHorizontal! * 7),
                       ),
                       SizedBox(
                         width: SizeConfig.blockSizeHorizontal! * 50,
@@ -148,6 +70,10 @@ class CadastroPage extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
+                    const CpfCadastroComponents(),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     const SenhaCadastroComponents(
                       text: 'Senha',
                     ),
@@ -167,9 +93,7 @@ class CadastroPage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom))
+            Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom))
           ],
         ),
       ),

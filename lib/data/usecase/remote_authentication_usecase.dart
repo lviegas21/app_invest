@@ -11,8 +11,7 @@ class RemoteAuthentication implements Authentication {
   @override
   Future auth(AuthenticationParams params) async {
     try {
-      final response = await _firebaseAuth.signInWithEmailAndPassword(
-          email: params.cpf, password: params.secret);
+      final response = await _firebaseAuth.signInWithEmailAndPassword(email: params.email, password: params.secret);
       return response;
     } catch (e) {
       throw e;
@@ -22,10 +21,8 @@ class RemoteAuthentication implements Authentication {
   @override
   Future signUp(AuthenticationParams params) async {
     try {
-      final response = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: params.email, password: params.secret);
-      final saveUsuario =
-          await firestore.collection("usuarios").doc(response.user?.uid).set({
+      final response = await _firebaseAuth.createUserWithEmailAndPassword(email: params.email, password: params.secret);
+      final saveUsuario = await firestore.collection("usuarios").doc(response.user?.uid).set({
         'nome': params.nome,
         'email': params.email,
         'senha': params.secret,
