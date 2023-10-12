@@ -2,6 +2,7 @@ import 'package:bolsa_valores/main/factories/pages/cadastro/cadastro_page_factor
 import 'package:bolsa_valores/main/factories/pages/home/home_page_factory.dart';
 import 'package:bolsa_valores/main/factories/pages/login/login_page_factory.dart';
 import 'package:bolsa_valores/main/factories/pages/pagamento/pagamento_page_refactor.dart';
+import 'package:bolsa_valores/main/factories/pages/perfil/perfil_page_factory.dart';
 import 'package:bolsa_valores/main/factories/pages/sobre/sobre.dart';
 import 'package:bolsa_valores/main/factories/pages/splash/splash.dart';
 import 'package:bolsa_valores/util/theme_data.dart';
@@ -54,6 +55,11 @@ class App extends StatelessWidget {
         GetPage(
           name: '/sobre',
           page: makeSobrePage,
+          transition: Transition.fadeIn,
+        ),
+        GetPage(
+          name: '/perfil',
+          page: makePerfilPageFactory,
           transition: Transition.fadeIn,
         ),
       ],
