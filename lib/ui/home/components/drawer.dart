@@ -77,7 +77,7 @@ class DrawerComponents extends StatelessWidget {
               ),
             ),
             onTap: () {
-              // Ação para a opção Cadastro de Investimento
+              Get.toNamed("/perfil", arguments: presenter.uid);
             },
             // Cor de destaque ao pressionar o botão
             splashColor: Colors.amberAccent,

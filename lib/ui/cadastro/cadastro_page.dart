@@ -10,6 +10,7 @@ import 'components/cpf_cadastro_components.dart';
 import 'components/email_cadastro_components.dart';
 import 'components/nome_cadastro_components.dart';
 import 'components/senha_cadastro_components.dart';
+import 'components/text_field_cadastro_components.dart';
 
 class CadastroPage extends StatelessWidget {
   final CadastroPresenter presenter;
@@ -35,7 +36,10 @@ class CadastroPage extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 2.5,
-              decoration: BoxDecoration(color: Colors.black87, borderRadius: BorderRadius.only(bottomLeft: Radius.circular(90))),
+              decoration: BoxDecoration(
+                  color: Colors.black87,
+                  borderRadius:
+                      BorderRadius.only(bottomLeft: Radius.circular(90))),
               child: Column(
                 children: [
                   SizedBox(height: SizeConfig.blockSizeVertical! * 15),
@@ -45,7 +49,9 @@ class CadastroPage extends StatelessWidget {
                       Text(
                         "Cadastro".toUpperCase(),
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.caption?.copyWith(fontWeight: FontWeight.w200, fontSize: SizeConfig.blockSizeHorizontal! * 7),
+                        style: Theme.of(context).textTheme.caption?.copyWith(
+                            fontWeight: FontWeight.w200,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 7),
                       ),
                       SizedBox(
                         width: SizeConfig.blockSizeHorizontal! * 50,
@@ -62,7 +68,12 @@ class CadastroPage extends StatelessWidget {
               child: Form(
                 child: Column(
                   children: [
-                    const NomeCadastroComponents(),
+                    TextFormFieldCadastroComponents(
+                      text: 'Nome',
+                      controller: presenter.nomeController,
+                      icon: Icons.person,
+                      keyboardType: TextInputType.name,
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -93,7 +104,9 @@ class CadastroPage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom))
+            Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom))
           ],
         ),
       ),

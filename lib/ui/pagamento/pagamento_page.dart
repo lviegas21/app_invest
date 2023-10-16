@@ -177,8 +177,12 @@ class PagamentoPage extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Text(
-                                      presenter.pagamento.value.cod_boleto
-                                          .toString(),
+                                      presenter.pagamento.value.cod_boleto ==
+                                              null
+                                          ? ""
+                                          : presenter.pagamento.value.cod_boleto
+                                              .toString(),
+
                                       style: TextStyle(
                                         fontSize:
                                             20, // Tamanho da fonte do código
