@@ -129,6 +129,7 @@ class SobrePage extends StatelessWidget {
       ),
       body: CarouselSlider(
         items: items,
+        disableGesture: true,
         options: CarouselOptions(
           height: double.infinity,
           autoPlay: true,
