@@ -26,7 +26,7 @@ class SplashPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text('App Investe',
+            Text('CI_MAIS',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline2),
             const Spacer(),
