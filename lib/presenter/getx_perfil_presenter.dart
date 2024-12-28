@@ -86,7 +86,7 @@ class GetxPerfilPresenter extends GetxController implements PerfilPresenter {
                   Get.back();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green, // Cor de fundo do botão
+                  backgroundColor: Colors.green, // Cor de fundo do botão
                 ),
                 child: Text(
                   'Ok',
@@ -138,7 +138,7 @@ class GetxPerfilPresenter extends GetxController implements PerfilPresenter {
                   Get.back();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green, // Cor de fundo do botão
+                  backgroundColor: Colors.green, // Cor de fundo do botão
                 ),
                 child: Text(
                   'Ok',

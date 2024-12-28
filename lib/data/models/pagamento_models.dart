@@ -1,4 +1,4 @@
-import 'package:bolsa_valores/domain/entities/entities.dart';
+import '../../domain/entities/entities.dart';
 
 class PagamentoModels {
   final String? cod_boleto;

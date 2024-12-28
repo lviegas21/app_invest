@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:bolsa_valores/domain/entities/investimento_entity.dart';
+import '../../domain/entities/entities.dart';
 
 class InvestimentoModels {
   final String? acao;

@@ -1,10 +1,47 @@
 {
   "project_info": {
     "project_number": "84424575253",
+    "firebase_url": "https://base-8f21a-default-rtdb.firebaseio.com",
     "project_id": "base-8f21a",
     "storage_bucket": "base-8f21a.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84424575253:android:f79df10826512f21f9411c",
+        "android_client_info": {
+          "package_name": "br.capacitar.cimais"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "84424575253-8ldvcbqje1furmti0lofjbrn4f3tjf0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMdOuHD90BPUS2kn20RZePcwooR2jPgFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "84424575253-8ldvcbqje1furmti0lofjbrn4f3tjf0d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "84424575253-9oc1kappdhcl3p0o4fm3mct6ngh8uuqh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.homeU"
+              }
+            }
+          ]
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:84424575253:android:75336fd72c8fefd8f9411c",

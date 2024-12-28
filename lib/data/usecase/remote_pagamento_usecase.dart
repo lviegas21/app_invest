@@ -1,7 +1,8 @@
-import 'package:bolsa_valores/data/models/models.dart';
-import 'package:bolsa_valores/domain/entities/entities.dart';
-import 'package:bolsa_valores/domain/usecase/usecase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../domain/entities/entities.dart';
+import '../../domain/usecase/usecase.dart';
+import '../models/models.dart';
 
 class RemotePagamentoUsecase implements QueryConsultaPay {
   @override

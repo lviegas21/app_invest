@@ -49,7 +49,7 @@ class CadastroPage extends StatelessWidget {
                       Text(
                         "Cadastro".toUpperCase(),
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.caption?.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.w200,
                             fontSize: SizeConfig.blockSizeHorizontal! * 7),
                       ),

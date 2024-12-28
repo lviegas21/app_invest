@@ -10,137 +10,210 @@ AppBar appBarWidget(
   Rx<String>? selectedMonth,
 ) {
   final presenter = Get.find<HomePresenter>();
+  final colorScheme = Theme.of(context).colorScheme;
+  final textTheme = Theme.of(context).textTheme;
+
   return AppBar(
-    backgroundColor: Colors.black, // Cor de fundo preta
-    title: Align(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        'Investimentos',
-        style: TextStyle(
-          color: Colors.white, // Cor do texto branca
+    backgroundColor: colorScheme.surface,
+    scrolledUnderElevation: 0,
+    title: Row(
+      children: [
+        Icon(
+          Icons.account_balance,
+          color: colorScheme.primary,
+          size: 28,
         ),
-      ),
+        SizedBox(width: 12),
+        Text(
+          'Invest App',
+          style: textTheme.titleLarge?.copyWith(
+            color: colorScheme.onSurface,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     ),
     actions: <Widget>[
-      IconButton(
-        icon: Icon(Icons.date_range),
-        onPressed: () {
-          _showDateSelectionModal(context, presenter, meses);
-        },
+      Container(
+        margin: EdgeInsets.only(right: 8),
+        decoration: BoxDecoration(
+          color: colorScheme.primaryContainer,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: IconButton(
+          icon: Icon(Icons.calendar_month_rounded),
+          color: colorScheme.primary,
+          onPressed: () => _showDateSelectionModal(context, presenter, meses),
+        ),
       ),
     ],
   );
 }
 
 void _showDateSelectionModal(
-    BuildContext context, HomePresenter presenter, List? meses) {
+  BuildContext context,
+  HomePresenter presenter,
+  List? meses,
+) {
+  final colorScheme = Theme.of(context).colorScheme;
+  final textTheme = Theme.of(context).textTheme;
+
   showModalBottomSheet(
-    backgroundColor: Colors
-        .transparent, // Remova a cor de fundo para ter um visual mais limpo
+    backgroundColor: Colors.transparent,
     context: context,
     builder: (BuildContext context) {
       return Obx(
-        () => Center(
-          child: Container(
-            margin: EdgeInsets.all(
-                16.0), // Adicione margens para espaçamento externo
-            padding: EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius:
-                  BorderRadius.circular(12.0), // Adicione cantos arredondados
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3), // Adicione sombra
-                  spreadRadius: 3,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                DropdownButton<String>(
-                  value: presenter.selectedMonth.value,
-                  onChanged: (value) {
-                    presenter.selectedMonth.value = value!;
-                    var id = meses.firstWhere((e) => value == e["descricao"]);
-                    presenter.controllerMes.value.text = id["id"];
-                  },
-                  items: meses!.map<DropdownMenuItem<String>>((dynamic value) {
-                    return DropdownMenuItem<String>(
-                      value: value["descricao"],
-                      child: Text(
-                        value["descricao"],
-                        style: TextStyle(
-                          color: Colors.amber,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  dropdownColor: Colors.black,
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.white,
+        () => Container(
+          margin: EdgeInsets.fromLTRB(16, 8, 16, 32),
+          decoration: BoxDecoration(
+            color: colorScheme.surface,
+            borderRadius: BorderRadius.circular(28),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                spreadRadius: 0,
+                blurRadius: 10,
+                offset: Offset(0, -5),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  margin: EdgeInsets.only(top: 8),
+                  width: 32,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: colorScheme.outlineVariant,
+                    borderRadius: BorderRadius.circular(2),
                   ),
                 ),
-                SizedBox(height: 16.0),
-                DropdownButton<int>(
-                  dropdownColor: Colors.black,
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.white,
-                  ),
-                  value: presenter.controllerAno.value,
-                  onChanged: (value) {
-                    presenter.controllerAno.value = value!;
-                  },
-                  items: List<DropdownMenuItem<int>>.generate(10, (index) {
-                    return DropdownMenuItem<int>(
-                      value: DateTime.now().year - 5 + index,
-                      child: Text(
-                        (DateTime.now().year - 5 + index).toString(),
-                        style: TextStyle(
-                          color: Colors.amber,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    );
-                  }),
-                ),
-                SizedBox(height: 16.0),
-                ElevatedButton(
-                  onPressed: () {
-                    presenter.loadFinancaMes();
-                    Get.back();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.amber, // Cor de fundo personalizada
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          8.0), // Cantos arredondados do botão
-                    ),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 12.0), // Espaçamento vertical do botão
-                    child: Center(
-                      child: Text(
-                        "Confirmar",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                        ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(24, 24, 24, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Selecione o período',
+                      style: textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Escolha o mês e ano para visualizar os investimentos',
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    SizedBox(height: 24),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildDropdown(
+                            context: context,
+                            value: presenter.selectedMonth.value,
+                            items: meses!.map<DropdownMenuItem<String>>(
+                              (dynamic value) {
+                                return DropdownMenuItem<String>(
+                                  value: value["descricao"],
+                                  child: Text(value["descricao"]),
+                                );
+                              },
+                            ).toList(),
+                            onChanged: (value) {
+                              presenter.selectedMonth.value = value!;
+                              var id = meses.firstWhere(
+                                  (e) => value == e["descricao"]);
+                              presenter.controllerMes.value.text = id["id"];
+                            },
+                            hint: 'Mês',
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Expanded(
+                          child: _buildDropdown(
+                            context: context,
+                            value: presenter.controllerAno.value,
+                            items: List<DropdownMenuItem<int>>.generate(
+                              10,
+                              (index) {
+                                final year =
+                                    DateTime.now().year - 5 + index;
+                                return DropdownMenuItem<int>(
+                                  value: year,
+                                  child: Text(year.toString()),
+                                );
+                              },
+                            ),
+                            onChanged: (value) {
+                              presenter.controllerAno.value = value!;
+                            },
+                            hint: 'Ano',
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 24),
+                    FilledButton(
+                      onPressed: () {
+                        presenter.loadFinancaMes();
+                        Navigator.pop(context);
+                      },
+                      child: Text('Confirmar'),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );
     },
+  );
+}
+
+Widget _buildDropdown<T>({
+  required BuildContext context,
+  required T value,
+  required List<DropdownMenuItem<T>> items,
+  required ValueChanged<T?> onChanged,
+  required String hint,
+}) {
+  final colorScheme = Theme.of(context).colorScheme;
+  final textTheme = Theme.of(context).textTheme;
+
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    decoration: BoxDecoration(
+      color: colorScheme.surfaceVariant.withOpacity(0.5),
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: colorScheme.outline),
+    ),
+    child: DropdownButton<T>(
+      value: value,
+      items: items,
+      onChanged: onChanged,
+      hint: Text(
+        hint,
+        style: textTheme.bodyMedium?.copyWith(
+          color: colorScheme.onSurfaceVariant,
+        ),
+      ),
+      style: textTheme.bodyLarge?.copyWith(
+        color: colorScheme.onSurface,
+      ),
+      icon: Icon(
+        Icons.arrow_drop_down_rounded,
+        color: colorScheme.onSurfaceVariant,
+      ),
+      underline: SizedBox(),
+      isExpanded: true,
+      borderRadius: BorderRadius.circular(12),
+    ),
   );
 }

@@ -40,8 +40,8 @@ class PagamentoPage extends StatelessWidget {
                   presenter.loadPix();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue, // Cor de fundo
-                  onPrimary: Colors.white, // Cor do texto
+                  backgroundColor: Colors.blue, // Cor de fundo
+                  foregroundColor: Colors.white, // Cor do texto
                   elevation: 5, // Elevação do botão
                   shape: RoundedRectangleBorder(
                     borderRadius:
@@ -65,8 +65,8 @@ class PagamentoPage extends StatelessWidget {
                   presenter.loadBoleto();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green, // Cor de fundo
-                  onPrimary: Colors.white, // Cor do texto
+                  backgroundColor: Colors.green, // Cor de fundo
+                  foregroundColor: Colors.white, // Cor do texto
                   elevation: 5, // Elevação do botão
                   shape: RoundedRectangleBorder(
                     borderRadius:
@@ -209,9 +209,9 @@ class PagamentoPage extends StatelessWidget {
                                         );
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors
+                                        backgroundColor: Colors
                                             .orange, // Cor de fundo do botão
-                                        onPrimary: Colors
+                                        foregroundColor: Colors
                                             .white, // Cor do texto do botão
                                         elevation: 5, // Elevação do botão
                                         shape: RoundedRectangleBorder(

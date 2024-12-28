@@ -10,7 +10,7 @@ class PagamentoEntity extends Equatable {
   final String? nome_recebedor;
   final String? valor;
 
-  PagamentoEntity({
+  const PagamentoEntity({
     this.cod_boleto,
     this.data_pagamento,
     this.isPagou,
@@ -21,7 +21,21 @@ class PagamentoEntity extends Equatable {
     this.valor,
   });
 
-  List get props => [
+  factory PagamentoEntity.fromJson(Map<String, dynamic> json) {
+    return PagamentoEntity(
+      cod_boleto: json['cod_boleto'] as String?,
+      data_pagamento: json['data_pagamento'] as String?,
+      isPagou: json['isPagou'] as bool?,
+      usuario_referencia: json['usuario_referencia'] as String?,
+      chave_cpf: json['chave_cpf'] as String?,
+      cidade: json['cidade'] as String?,
+      nome_recebedor: json['nome_recebedor'] as String?,
+      valor: json['valor'] as String?,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
         cod_boleto,
         data_pagamento,
         isPagou,

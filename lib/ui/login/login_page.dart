@@ -1,22 +1,22 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:bolsa_valores/ui/login/components/button_components.dart';
 import 'package:bolsa_valores/ui/login/components/components.dart';
 import 'package:bolsa_valores/ui/login/login_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../util/screen_size.dart';
-
-import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
   final LoginPresenter presenter;
-  const LoginPage({required this.presenter});
+  const LoginPage({super.key, required this.presenter});
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     void _hideKeyboard() {
       final currentFocus = FocusScope.of(context);
       if (!currentFocus.hasPrimaryFocus) {
@@ -26,80 +26,127 @@ class LoginPage extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        reverse: true,
-        child: Column(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2.5,
-              decoration: BoxDecoration(
-                color: Colors.black87,
-                borderRadius:
-                    BorderRadius.only(bottomLeft: Radius.circular(90)),
-              ),
+      body: GestureDetector(
+        onTap: _hideKeyboard,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                colorScheme.primary,
+                colorScheme.primaryContainer,
+              ],
+            ),
+          ),
+          child: SafeArea(
+            child: SingleChildScrollView(
+              reverse: true,
               child: Column(
                 children: [
-                  SizedBox(height: SizeConfig.blockSizeVertical! * 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .center, // Centralizar o título e a imagem
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Entrar".toUpperCase(),
-                          textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.caption?.copyWith(
-                              fontWeight: FontWeight.w200,
-                              fontSize: SizeConfig.blockSizeHorizontal! * 7),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      vertical: SizeConfig.blockSizeVertical! * 8,
+                    ),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.account_balance,
+                          size: 80,
+                          color: colorScheme.onPrimary,
                         ),
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          width: SizeConfig.blockSizeHorizontal! * 50,
-                          height: SizeConfig.blockSizeVertical! * 10,
-                          child: Image.asset("assets/logo.png"),
+                        SizedBox(height: SizeConfig.blockSizeVertical! * 2),
+                        Text(
+                          "Invest App",
+                          style: textTheme.headlineLarge?.copyWith(
+                            color: colorScheme.onPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
+                        SizedBox(height: SizeConfig.blockSizeVertical! * 1),
+                        Text(
+                          "Seu portal de investimentos",
+                          style: textTheme.titleMedium?.copyWith(
+                            color: colorScheme.onPrimary.withOpacity(0.8),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.blockSizeHorizontal! * 8,
+                      vertical: SizeConfig.blockSizeVertical! * 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: colorScheme.surface,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
                       ),
-                      SizedBox(
-                          width: 16), // Espaçamento entre a imagem e o título
-                    ],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 10,
+                          offset: Offset(0, -5),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Bem-vindo",
+                          style: textTheme.headlineSmall?.copyWith(
+                            color: colorScheme.onSurface,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          "Faça login para continuar",
+                          style: textTheme.bodyLarge?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                        SizedBox(height: SizeConfig.blockSizeVertical! * 4),
+                        EmailComponents(),
+                        SizedBox(height: SizeConfig.blockSizeVertical! * 2),
+                        SenhaComponents(),
+                        SizedBox(height: SizeConfig.blockSizeVertical! * 3),
+                        LoginButton(
+                          horizontalPadding: 0,
+                        ),
+                        SizedBox(height: SizeConfig.blockSizeVertical! * 2),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Não tem uma conta?",
+                              style: textTheme.bodyMedium?.copyWith(
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () => Get.toNamed('/cadastro'),
+                              child: Text(
+                                'Criar conta',
+                                style: textTheme.bodyMedium?.copyWith(
+                                  color: colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: SizeConfig.blockSizeVertical! * 6),
-            Container(
-              child: Form(
-                child: Column(
-                  children: [
-                    const EmailComponents(),
-                    const SizedBox(height: 20),
-                    const SenhaComponents(),
-                    const SizedBox(height: 40),
-                    LoginButton(
-                      horizontalPadding: 10,
-                    ),
-                    const SizedBox(height: 40),
-                    TextButton(
-                      onPressed: () => Get.toNamed("/cadastro"),
-                      child: Text(
-                        "Não é usuário ainda? Clique aqui",
-                        style: TextStyle(
-                          color: Colors.black, // Cor do texto preta
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-            ),
-          ],
+          ),
         ),
       ),
     );

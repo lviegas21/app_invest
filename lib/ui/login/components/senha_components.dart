@@ -4,34 +4,44 @@ import 'package:get/get.dart';
 import '../login_presenter.dart';
 
 class SenhaComponents extends StatelessWidget {
-  const SenhaComponents({Key? key}) : super(key: key);
+  const SenhaComponents({super.key});
 
   @override
   Widget build(BuildContext context) {
     final presenter = Get.find<LoginPresenter>();
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Obx(
       () => Padding(
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
         child: TextField(
-          textInputAction: TextInputAction.next,
+          textInputAction: TextInputAction.done,
           keyboardType: TextInputType.visiblePassword,
+          obscureText: true,
           controller: presenter.senhaController.value,
-          cursorColor: const Color(0xFF0F192C),
-          style: const TextStyle(color: Color(0xFF0F192C), fontSize: 18),
+          cursorColor: colorScheme.primary,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: colorScheme.onSurface,
+              ),
           onChanged: presenter.validate,
           decoration: InputDecoration(
-            fillColor: Color.fromARGB(179, 219, 216, 216),
             filled: true,
+            fillColor: colorScheme.surfaceVariant.withOpacity(0.5),
             border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10)),
-            labelStyle: const TextStyle(color: Color(0xFF0F192C)),
-            prefixIcon: const Icon(Icons.person, color: Color(0xFF0F192C)),
-            hintText: "Senha",
-            //errorText: presenter.cpfError.value?.isEmpty == true
-            //? null
-            // : presenter.cpfError.value,
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: colorScheme.outline),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: colorScheme.primary, width: 2),
+            ),
+            labelText: 'Senha',
+            labelStyle: TextStyle(color: colorScheme.onSurfaceVariant),
+            prefixIcon: Icon(Icons.lock, color: colorScheme.onSurfaceVariant),
           ),
         ),
       ),

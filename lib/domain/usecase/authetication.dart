@@ -7,18 +7,19 @@ abstract class Authentication {
   Future<dynamic> signUp(AuthenticationParams params);
 }
 
-class AuthenticationParams extends Equatable {
-  final String nome;
+class AuthenticationParams {
   final String email;
   final String secret;
+  final String nome;
   final String cpf;
 
-  const AuthenticationParams(
-      {required this.email,
-      required this.secret,
-      this.nome = "",
-      this.cpf = ""});
+  AuthenticationParams({
+    required this.email,
+    required this.secret,
+    this.nome = '',
+    this.cpf = '',
+  });
 
   @override
-  List get props => [email, secret, nome, cpf];
+  String toString() => 'AuthenticationParams($email, $secret, $nome, $cpf)';
 }

@@ -3,124 +3,152 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:flutter/material.dart';
-
 class DrawerComponents extends StatelessWidget {
-  const DrawerComponents({Key? key});
+  const DrawerComponents({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final presenter = Get.find<HomePresenter>();
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Drawer(
-      backgroundColor: Colors.black, // Cor de fundo preta
-      child: ListView(
-        physics: const NeverScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(vertical: 10),
+      backgroundColor: colorScheme.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(32),
+          bottomRight: Radius.circular(32),
+        ),
+      ),
+      child: Column(
         children: [
-          Container(
-            height: 160, // Altura do cabeçalho
-            color: Colors.black, // Cor de fundo preta
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          _buildHeader(presenter, colorScheme, textTheme),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
               children: [
-                const SizedBox(
-                  height: 20,
+                _buildDrawerItem(
+                  context: context,
+                  icon: Icons.payment_rounded,
+                  title: 'Pagamentos',
+                  onTap: () => Get.toNamed("/pagamento", arguments: presenter.uid),
                 ),
-                const CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.white, // Cor de fundo branca
-                  child: Icon(
-                    Icons.person,
-                    size: 50,
-                    color: Colors.black, // Cor do ícone preta
-                  ),
+                _buildDrawerItem(
+                  context: context,
+                  icon: Icons.add_chart_rounded,
+                  title: 'Cadastro de Investimento',
+                  onTap: () => Get.toNamed("/perfil", arguments: presenter.uid),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  presenter.params.email,
-                  style: const TextStyle(
-                    color: Colors.white, // Cor do texto branca
-                  ),
+                _buildDrawerItem(
+                  context: context,
+                  icon: Icons.info_outline_rounded,
+                  title: 'Sobre',
+                  onTap: () => Get.toNamed("/sobre"),
                 ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 40,
-          ),
-          ListTile(
-            title: const Text(
-              'Pagamentos',
-              style: TextStyle(
-                color: Colors.amber, // Cor amarelo queimado
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: FilledButton.tonal(
+              onPressed: () {
+                Get.offAllNamed('/login');
+              },
+              style: FilledButton.styleFrom(
+                backgroundColor: colorScheme.errorContainer,
+                foregroundColor: colorScheme.error,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.logout_rounded, size: 20),
+                  SizedBox(width: 8),
+                  Text('Sair'),
+                ],
               ),
             ),
-            onTap: () {
-              Get.toNamed("/pagamento", arguments: presenter.uid);
-              // Ação para a opção Pagamentos
-            },
-            // Cor de destaque ao pressionar o botão
-            splashColor: Colors.amberAccent,
-          ),
-          Divider(
-            color: Colors.white, // Cor do divisor
-            thickness: 1, // Espessura do divisor
-          ),
-          ListTile(
-            title: Text(
-              'Cadastro de Investimento',
-              style: TextStyle(
-                color: Colors.amber, // Cor amarelo queimado
-              ),
-            ),
-            onTap: () {
-              Get.toNamed("/perfil", arguments: presenter.uid);
-            },
-            // Cor de destaque ao pressionar o botão
-            splashColor: Colors.amberAccent,
-          ),
-          Divider(
-            color: Colors.white, // Cor do divisor
-            thickness: 1, // Espessura do divisor
-          ),
-          ListTile(
-            title: Text(
-              'Sobre',
-              style: TextStyle(
-                color: Colors.amber, // Cor amarelo queimado
-              ),
-            ),
-            onTap: () {
-              Get.toNamed("/sobre");
-            },
-            // Cor de destaque ao pressionar o botão
-            splashColor: Colors.amberAccent,
-          ),
-          Divider(
-            color: Colors.white, // Cor do divisor
-            thickness: 1, // Espessura do divisor
-          ),
-          ListTile(
-            title: Text(
-              'Sair',
-              style: TextStyle(
-                color: Colors.amber, // Cor amarelo queimado
-              ),
-            ),
-            onTap: () {
-              // Ação para a opção Sair
-            },
-            // Cor de destaque ao pressionar o botão
-            splashColor: Colors.amberAccent,
-          ),
-          Divider(
-            color: Colors.white, // Cor do divisor
-            thickness: 1, // Espessura do divisor
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildHeader(
+    HomePresenter presenter,
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(16, 48, 16, 16),
+      decoration: BoxDecoration(
+        color: colorScheme.primaryContainer,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(32),
+        ),
+      ),
+      child: Column(
+        children: [
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              color: colorScheme.primary,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: colorScheme.surface,
+                width: 3,
+              ),
+            ),
+            child: Icon(
+              Icons.person_rounded,
+              size: 40,
+              color: colorScheme.onPrimary,
+            ),
+          ),
+          SizedBox(height: 16),
+          Text(
+            presenter.params.email ?? 'Usuário',
+            style: textTheme.titleMedium?.copyWith(
+              color: colorScheme.onPrimaryContainer,
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDrawerItem({
+    required BuildContext context,
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      child: ListTile(
+        onTap: onTap,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        leading: Icon(
+          icon,
+          color: colorScheme.primary,
+          size: 24,
+        ),
+        title: Text(
+          title,
+          style: textTheme.titleSmall?.copyWith(
+            color: colorScheme.onSurface,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        minLeadingWidth: 0,
+        horizontalTitleGap: 12,
       ),
     );
   }

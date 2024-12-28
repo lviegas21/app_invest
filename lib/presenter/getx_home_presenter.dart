@@ -18,71 +18,6 @@ class GetxHomePresenter extends GetxController implements HomePresenter {
   dynamic uid = Get.arguments.first;
 
   @override
-  void onInit() async {
-    pagamento.value = await verificaUltimoPagamento();
-    pagamento.value.isPagou == false
-        ? Get.defaultDialog(
-            backgroundColor: Colors
-                .transparent, // Removemos a cor de fundo para personalizar o diálogo
-            contentPadding:
-                EdgeInsets.zero, // Removemos o espaçamento interno padrão
-            content: Container(
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius:
-                    BorderRadius.circular(10.0), // Bordas arredondadas
-              ),
-              padding: EdgeInsets.all(20.0), // Espaçamento interno
-              child: Column(
-                mainAxisSize:
-                    MainAxisSize.min, // Ocupa o mínimo de espaço vertical
-                children: [
-                  Icon(
-                    Icons.warning,
-                    color: Colors.orange,
-                    size: 48.0,
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Cobrança Mensal',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Você possui uma cobrança mensal pendente. Acesse o painel de pagamentos e continue em dia.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green, // Cor de fundo do botão
-                    ),
-                    child: Text(
-                      'Ok',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        : SizedBox();
-    super.onInit();
-  }
-
-  @override
   RxMap result = {}.obs;
 
   @override
@@ -94,23 +29,6 @@ class GetxHomePresenter extends GetxController implements HomePresenter {
   @override
   Rx<TextEditingController> controllerMes = TextEditingController().obs;
 
-  Future<dynamic> verificaUltimoPagamento() async {
-    try {
-      return await queryResultInvestimento.loadVerificaUltimoPagamento(uid);
-    } catch (e) {}
-  }
-
-  @override
-  Future<void> loadFinancaMes() async {
-    try {
-      investimento.value =
-          await queryResultInvestimento.loadDetalheInvestimentoData(
-              '${controllerMes.value.text}/${controllerAno.value}', uid);
-    } catch (e) {
-      print('error ${e}');
-    }
-  }
-
   @override
   Rx<PagamentoEntity> pagamento = PagamentoEntity().obs;
 
@@ -119,4 +37,96 @@ class GetxHomePresenter extends GetxController implements HomePresenter {
 
   @override
   Rx<int> controllerAno = DateTime.now().year.obs;
+
+  @override
+  void onInit() async {
+    debugPrint('GetxHomePresenter onInit');
+    try {
+      final result = await verificaUltimoPagamento();
+      if (result is Map<String, dynamic>) {
+        pagamento.value = PagamentoEntity.fromJson(result);
+      } else {
+        pagamento.value = PagamentoEntity();
+      }
+
+      if (pagamento.value.isPagou == false) {
+        Get.defaultDialog(
+          backgroundColor: Colors.transparent,
+          contentPadding: EdgeInsets.zero,
+          content: Container(
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.warning,
+                  color: Colors.orange,
+                  size: 48.0,
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  'Cobrança Mensal',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  'Você possui uma cobrança mensal pendente. Acesse o painel de pagamentos e continue em dia.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                ElevatedButton(
+                  onPressed: () => Get.back(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                  ),
+                  child: Text(
+                    'Ok',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      debugPrint('Erro ao verificar pagamento: $e');
+      pagamento.value = PagamentoEntity();
+    }
+    super.onInit();
+  }
+
+  Future<dynamic> verificaUltimoPagamento() async {
+    try {
+      return await queryResultInvestimento.loadVerificaUltimoPagamento(uid);
+    } catch (e) {
+      debugPrint('Erro ao verificar último pagamento: $e');
+      return null;
+    }
+  }
+
+  @override
+  Future<void> loadFinancaMes() async {
+    try {
+      investimento.value = await queryResultInvestimento.loadDetalheInvestimentoData(
+        '${controllerMes.value.text}/${controllerAno.value}',
+        uid,
+      );
+    } catch (e) {
+      debugPrint('Erro ao carregar finanças do mês: $e');
+    }
+  }
 }
